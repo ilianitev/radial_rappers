@@ -132,7 +132,7 @@ const colorOf=(c,key)=>{const sc=scale(c,key);return g=>(c.col&&c.col[g])||sc(g)
 /* nav + accueil */
 $("#tabs").innerHTML=Object.values(DS).map(c=>`<a class="t" id="t-${c.id}" href="#/${c.id}">${c.name}</a>`).join("");
 $("#cards").innerHTML=Object.values(DS).map(c=>{const n=c.rows.length,u=new Set(c.rows.map(r=>r.tg)).size;
- return `<a class="c" href="#/${c.id}"><svg id="p-${c.id}" viewBox="0 0 200 200" aria-hidden="true"></svg><h2>${esc(c.id==="okis"?"¨Place dropping chez Okis":"Name dropping chez "+c.name)}</h2><p>${esc(c.desc)}</p><div class="n">${n} citations, ${plural(c,u)}</div></a>`}).join("");
+ return `<a class="c" href="#/${c.id}"><svg id="p-${c.id}" viewBox="0 0 200 200" aria-hidden="true"></svg><h2>${esc(c.id==="okis"?"Place dropping chez Okis":"Name dropping chez "+c.name)}</h2><p>${esc(c.desc)}</p><div class="n">${n} citations, ${plural(c,u)}</div></a>`}).join("");
 for(const c of Object.values(DS)){if(c.mode==="timeline"){previewTL(c);continue}const cnt={};c.rows.forEach(r=>{const g=r.h[c.key][0];cnt[g]=(cnt[g]||0)+1});
  const h=d3.hierarchy({children:Object.entries(cnt).map(([k,v])=>({k,v}))}).sum(d=>d.v||0);d3.pack().size([200,200]).padding(3)(h);
  const col=colorOf(c,c.key);
