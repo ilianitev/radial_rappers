@@ -73,8 +73,8 @@ button.btn{background:none;font-size:13px;color:var(--acc);padding:0 10px}
 </style></head><body>
 <nav><a class="brand" href="#/">Rap et références</a><span id="tabs"></span></nav>
 <section id="home" hidden><div class="wrap">
-<h1>Namedropping, placedropping</h1>
-<p class="lead">Références à des personnes et à des lieux dans les textes d'Alpha Wann, Jean Jass et Okis. Choisissez un univers et retrouvez chaque phrase.</p>
+<h1>Name dropping et placedropping ; exploration de citations de trois rappeurs</h1>
+<p class="lead">Références à des personnes et à des lieux dans les textes d'Alpha Wann, Jean Jass et Okis.</p>
 <div class="cards" id="cards"></div></div></section>
 <div id="app" hidden>
 <header><h1 id="h1"></h1><p id="sub"></p>
@@ -90,8 +90,10 @@ const PAL=["#e08a00","#ff5a7e","#8a4fe0","#3f6fe0","#f5c400","#1aa59a","#e0562b"
 const OKIS={"Lyon":"#7fa3cf","Rhône":"#c0182e","Monde":"#2a62a8","France":"#6b6b6b"};
 const DS={
  
-alpha:{name:"Alpha Wann",mode:"timeline",title:"Laisse-moi rapper comme Lavokato ou le Prince Waly",
-       desc:"Name dropping chez Alpha Wann.",
+alpha:{name:"Alpha Wann",
+       mode:"timeline",
+       title:"Laisse-moi rapper comme Lavokato ou le Prince Waly",
+       desc:"Laisse-moi rapper comme Lavokato ou le Prince Waly",
        unit:["personnalité","personnalités"],
        ph:"Chercher un nom, une punchline, un titre…",
        all:"Tous les types de projet",
@@ -99,15 +101,15 @@ alpha:{name:"Alpha Wann",mode:"timeline",title:"Laisse-moi rapper comme Lavokato
        credit:"Textes écrits par Alpha Wann et compilés par les contributeurs Rapgenius. Exploration et analyse : Ilian Masson."},
  
 jeanjass:{name:"Jean Jass",
-          title:"Toi, c'est League Jupiler, nous c'est Bundesliga. J'lâcherai jamais l'affaire comme Bouteflika. ?",
-          desc:"Name dropping chez Jean Jass",unit:["personnalité","personnalités"],
+          title:"Toi, c'est League Jupiler, nous c'est Bundesliga. J'lâcherai jamais l'affaire comme Bouteflika",
+          desc:"Toi, c'est League Jupiler, nous c'est Bundesliga. J'lâcherai jamais l'affaire comme Bouteflika",unit:["personnalité","personnalités"],
           ph:"Chercher un nom, une punchline, un titre…",all:"Tous les types de projet",
           groups:{theme:"Thème › sous-thème",nat:"Nationalité",kind:"Nature › thème",year:"Année du projet › thème",vie:"Statut › thème"},credit:"Textes écrits par Jean Jass et compilés par les contributeurs Rapgenius. Exploration et analyse : Ilian Masson."},
  
 okis:{name:"Okis",
       title:"« Demain à l'aube, je partirai vers le sud du monde »",
       sub:"Exploration des lieux cités dans les morceaux de Okis.",
-      desc:"300 - 1 - 4 : ça veut dire quoi ?",
+      desc:"69, 300 - 1 - 4",
       unit:["lieu","lieux"],
       ph:"Chercher un lieu, une phrase, un morceau…",
       all:"Album : tous les projets",
@@ -128,7 +130,7 @@ const colorOf=(c,key)=>{const sc=scale(c,key);return g=>(c.col&&c.col[g])||sc(g)
 /* nav + accueil */
 $("#tabs").innerHTML=Object.values(DS).map(c=>`<a class="t" id="t-${c.id}" href="#/${c.id}">${c.name}</a>`).join("");
 $("#cards").innerHTML=Object.values(DS).map(c=>{const n=c.rows.length,u=new Set(c.rows.map(r=>r.tg)).size;
- return `<a class="c" href="#/${c.id}"><svg id="p-${c.id}" viewBox="0 0 200 200" aria-hidden="true"></svg><h2>${esc(c.id==="okis"?"Les lieux chez Okis":"Name dropping chez "+c.name)}</h2><p>${esc(c.desc)}</p><div class="n">${n} citations, ${plural(c,u)}</div></a>`}).join("");
+ return `<a class="c" href="#/${c.id}"><svg id="p-${c.id}" viewBox="0 0 200 200" aria-hidden="true"></svg><h2>${esc(c.id==="okis"?"¨Place dropping chez Okis":"Name dropping chez "+c.name)}</h2><p>${esc(c.desc)}</p><div class="n">${n} citations, ${plural(c,u)}</div></a>`}).join("");
 for(const c of Object.values(DS)){if(c.mode==="timeline"){previewTL(c);continue}const cnt={};c.rows.forEach(r=>{const g=r.h[c.key][0];cnt[g]=(cnt[g]||0)+1});
  const h=d3.hierarchy({children:Object.entries(cnt).map(([k,v])=>({k,v}))}).sum(d=>d.v||0);d3.pack().size([200,200]).padding(3)(h);
  const col=colorOf(c,c.key);
